@@ -1,0 +1,104 @@
+google:
+  default:
+    # service account path
+    service_account_path: .gcp/service_account.json
+    # client secrets path
+    client_secrets_path: .gcp/client_secrets.json
+  spread_sheet:
+    use: True
+    # spreadsheet id
+    id: dummy # TODO update
+  photo_library:
+    use: True
+    # photo library token path
+    token_path: .gcp/photo_token.json
+    # google photo album name
+    album_title: IoT Kitchen Garden
+    # save image directory
+    img_dir: img
+  mail:
+    # mail token path
+    token_path: .gcp/mail_token.json
+    # email address to send
+    to_address: dummy # TODO update
+    summary:
+      use: True
+      subject: "[Summary] IoT Kitchen Garden"
+      body: "Summary data of IoT sensor for the last week."
+      scheduler:
+        day_of_week: [ monday, tuesday, wednesday, thursday, friday, saturday, sunday ]
+        at_time: "7:00:00"
+    alert:
+      use: True
+      subject: "[Alert] IoT Kitchen Garden"
+      body:
+        # {name}, {threshold}, {value}, {unit} will be converted
+        upper: "{name} has risen above the setting value of {threshold}{unit} (currently: {value}{unit})."
+        lower: "{name} has dropped below the setting value of {threshold}{unit} (currently: {value}{unit})."
+      # time to skip the same type of notification (minutes)
+      skip_interval_minutes: 120
+      # available filters.name [ light, temperature, humidity, co2, distance ]
+      #   unit: light(lux), temperature(C), humidity(%), co2(ppm), distance(mm)
+      # available filters.limit [ upper, lower ]
+      filters:
+        # example
+        - name: temperature
+          limit: upper
+          threshold: 35
+        - name: temperature
+          limit: lower
+          threshold: 0
+        - name: co2
+          limit: upper
+          threshold: 1500
+        - name: co2
+          limit: lower
+          threshold: 300
+
+module:
+  # relay module
+  relay_module:
+    # time to turn on water (seconds)
+    turn_on_time: 10
+    scheduler:
+      use: True
+      day_of_week: [ monday, tuesday, wednesday, thursday, friday, saturday, sunday ]
+      at_time: "8:00:00"
+    conditions:
+      use: True
+      # time to skip the turning on relay module (minutes)
+      skip_interval_minutes: 720
+      # available filters.name [ light, temperature, humidity, co2, distance ]
+      #   unit: light(lux), temperature(C), humidity(%), co2(ppm), distance(mm)
+      # available filters.limit [ upper, lower ]
+      filters:
+        # example
+        - name: light
+          limit: upper
+          threshold: 200
+        - name: temperature
+          limit: upper
+          threshold: 35
+  # web camera module
+  web_camera_module:
+    use: True
+    scheduler:
+      day_of_week: [ monday, tuesday, wednesday, thursday, friday, saturday, sunday ]
+      at_time: "6:30:00"
+
+sensor:
+  scheduler:
+    # time interval to monitor (minutes)
+    interval_minutes: 10
+  # light sensor
+  bh1750fvi:
+    use: True
+  # temperature, humidity sensor
+  sft31:
+    use: True
+  # co2, temperature, humidity sensor
+  co2mini:
+    use: True
+  # distance, light sensor
+  vl6180:
+    use: True
