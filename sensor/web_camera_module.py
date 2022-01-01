@@ -1,5 +1,6 @@
 import cv2
 from logging import getLogger, INFO
+from datetime import datetime
 from time import sleep
 
 logger = getLogger(__name__)
@@ -18,11 +19,12 @@ class WebCameraModule(object):
         self._device_id = device_id
         logger.info("web camera module is starting...")
 
-    def save_photo(self, save_path: str) -> bool:
+    def save_photo(self, save_path: str, with_datetime: bool = True) -> bool:
         """Save a web camera photo.
 
         Args:
             save_path: save web camera photo path
+            with_datetime: with datetime text
 
         Returns:
             A boolean if success to save a web camera photo.
@@ -38,6 +40,9 @@ class WebCameraModule(object):
         if not result:
             logger.error("Failed to read video capture.")
             return False
+        if with_datetime:
+            current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            cv2.putText(img, current_datetime, (0, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 3, cv2.LINE_AA)
 
         result = cv2.imwrite(save_path, img)
         cap.release()
