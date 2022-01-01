@@ -102,7 +102,7 @@ google:
       body: "Summary data of IoT sensor for the last week."
       scheduler:
         day_of_week: [ monday, tuesday, wednesday, thursday, friday, saturday, sunday ]
-        at_time: "7:00:00"
+        at_time: "9:00:00"
     alert:
       use: True
       subject: "[Alert] IoT Kitchen Garden"
@@ -138,7 +138,7 @@ module:
     scheduler:
       use: True
       day_of_week: [ monday, tuesday, wednesday, thursday, friday, saturday, sunday ]
-      at_time: "8:00:00"
+      at_time: "8:30:00"
     conditions:
       use: True
       # time to skip the turning on relay module (minutes)
@@ -159,7 +159,7 @@ module:
     use: True
     scheduler:
       day_of_week: [ monday, tuesday, wednesday, thursday, friday, saturday, sunday ]
-      at_time: "6:30:00"
+      at_time: "8:00:00"
 
 sensor:
   scheduler:
