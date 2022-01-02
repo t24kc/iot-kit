@@ -187,3 +187,12 @@ $ poetry run python handler.py
 # run with system python
 $ python3 handler.py
 ```
+
+Cleanup script.
+```zsh
+# run with poetry
+$ poetry run python handler.py -f cleanup
+
+# run with system python
+$ python3 handler.py -f cleanup
+```

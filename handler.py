@@ -1,6 +1,7 @@
 import os
 import yaml
 import schedule
+import argparse
 import matplotlib.pyplot as plt
 import pandas as pd
 from typing import List, Dict, Optional
@@ -232,7 +233,7 @@ class Scheduler(object):
         self._relay_module.turn_on(self._config["module"]["relay_module"]["turn_on_time"])
         self._interval_minutes["relay_module"] = self._config["module"]["relay_module"]["conditions"]["skip_interval_minutes"]
 
-    def _turn_off_water(self) -> None:
+    def turn_off_water(self) -> None:
         """Turn off water by relay module.
         """
         if not self.is_use_flag("module", "relay_module", "scheduler") \
@@ -480,13 +481,13 @@ def main() -> None:
         config = yaml.full_load(file)
 
     scheduler = Scheduler(config)
-    create_scheduler_job(scheduler.monitoring_job, config["sensor"]["scheduler"])
+    _create_scheduler_job(scheduler.monitoring_job, config["sensor"]["scheduler"])
     if scheduler.is_use_flag("google", "mail", "summary"):
-        create_scheduler_job(scheduler.summary_mail_job, config["google"]["mail"]["summary"]["scheduler"])
+        _create_scheduler_job(scheduler.summary_mail_job, config["google"]["mail"]["summary"]["scheduler"])
     if scheduler.is_use_flag("module", "relay_module", "scheduler"):
-        create_scheduler_job(scheduler.relay_module_job, config["module"]["relay_module"]["scheduler"])
+        _create_scheduler_job(scheduler.relay_module_job, config["module"]["relay_module"]["scheduler"])
     if scheduler.is_use_flag("module", "web_camera_module"):
-        create_scheduler_job(scheduler.web_camera_module_job, config["module"]["web_camera_module"]["scheduler"])
+        _create_scheduler_job(scheduler.web_camera_module_job, config["module"]["web_camera_module"]["scheduler"])
 
     try:
         while True:
@@ -496,12 +497,23 @@ def main() -> None:
         scheduler.cleanup()
 
 
-def create_scheduler_job(callback_job: object, scheduler_config: Dict) -> None:
+def cleanup() -> None:
+    """turn off water and cleanup function.
+    """
+    with open("config.yaml") as file:
+        config = yaml.full_load(file)
+
+    scheduler = Scheduler(config)
+    scheduler.turn_off_water()
+    scheduler.cleanup()
+
+
+def _create_scheduler_job(callback_job: object, scheduler_config: Dict) -> None:
     """Create the scheduler job.
 
     Args:
         callback_job: user callback function
-        scheduler_config: sheculer yaml config
+        scheduler_config: scheduler yaml config
     """
     if "interval_minutes" in scheduler_config:
         schedule.every(scheduler_config["interval_minutes"]).minutes.do(callback_job)
@@ -514,4 +526,9 @@ def create_scheduler_job(callback_job: object, scheduler_config: Dict) -> None:
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="main handler script")
+    parser.add_argument("-f", "--function", type=str, default="main", help="set function name in this file")
+    args = parser.parse_args()
+
+    func_dict = {name: function for name, function in locals().items() if callable(function)}
+    func_dict[args.function]()
