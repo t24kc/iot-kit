@@ -70,6 +70,7 @@ LABEL="co2mini_end"
 ```
 
 # Usage
+## Update config
 Update config file `config.yaml` in advance.
 - https://github.com/t24kc/iot-kitchen-garden/blob/main/config.yaml
 ```yaml
@@ -179,20 +180,32 @@ sensor:
     use: True
 ```
 
-Run script.
+## Run Script
+script usage.
+```zsh
+$ python handler.py --heop
+usage: handler.py [-h] [-f FUNCTION]
+
+main handler script
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -f FUNCTION, --function FUNCTION
+                        set function name in this file
+```
+
+main scheduler script.
 ```zsh
 # run with poetry
 $ poetry run python handler.py
-
 # run with system python
 $ python3 handler.py
 ```
 
-Cleanup script.
+cleanup script.
 ```zsh
 # run with poetry
 $ poetry run python handler.py -f cleanup
-
 # run with system python
 $ python3 handler.py -f cleanup
 ```
