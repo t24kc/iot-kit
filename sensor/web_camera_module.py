@@ -41,7 +41,7 @@ class WebCameraModule(object):
             logger.error("Failed to read video capture.")
             return False
         if with_datetime:
-            current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            current_datetime = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
             cv2.putText(img, current_datetime, (0, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 3, cv2.LINE_AA)
 
         result = cv2.imwrite(save_path, img)
