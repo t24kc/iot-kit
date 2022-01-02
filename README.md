@@ -11,11 +11,10 @@ $ sudo apt-get install python-opencv
 ```
 Install python package.
 ```zsh
-# install with poetry
-$ poetry install
-
 # install with pip
 $ pip3 install -r requirements.txt
+# install with poetry (optional)
+$ poetry install
 ```
 
 ## Create Service Account
@@ -63,9 +62,7 @@ If you don't want to run your script as root make sure you have sufficient right
 Save it as `/etc/udev/rules.d/90-co2mini.rules` and add the script user to the group `plugdev`.
 ```zsh
 ACTION=="remove", GOTO="co2mini_end"
-
 SUBSYSTEMS=="usb", KERNEL=="hidraw*", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="a052", GROUP="plugdev", MODE="0660", SYMLINK+="co2mini%n", GOTO="co2mini_end"
-
 LABEL="co2mini_end"
 ```
 
@@ -183,7 +180,7 @@ sensor:
 ## Run Script
 script usage.
 ```zsh
-$ python handler.py --heop
+$ python3 handler.py --help
 usage: handler.py [-h] [-f FUNCTION]
 
 main handler script
@@ -196,16 +193,16 @@ optional arguments:
 
 main scheduler script.
 ```zsh
-# run with poetry
-$ poetry run python handler.py
 # run with system python
 $ python3 handler.py
+# run with poetry (optional)
+$ poetry run python handler.py
 ```
 
 cleanup script.
 ```zsh
-# run with poetry
-$ poetry run python handler.py -f cleanup
 # run with system python
 $ python3 handler.py -f cleanup
+# run with poetry (optional)
+$ poetry run python handler.py -f cleanup
 ```
