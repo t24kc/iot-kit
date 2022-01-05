@@ -1,9 +1,10 @@
 import smbus2
 from typing import List
-from logging import getLogger, INFO
+from logging import getLogger, basicConfig, INFO
 from time import sleep
 
 logger = getLogger(__name__)
+basicConfig(level=INFO)
 logger.setLevel(INFO)
 
 ADDRESS = 0x23
@@ -73,6 +74,7 @@ class BH1750FVI(object):
         Returns:
             Digital light sensor lux.
         """
+        light = self.read(command)
         return self.convert_to_number(light)
 
     def read(self, register: int) -> List:

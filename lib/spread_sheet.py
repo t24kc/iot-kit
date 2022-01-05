@@ -1,10 +1,11 @@
 import time
 import gspread
-from logging import getLogger, INFO
+from logging import getLogger, basicConfig, INFO
 from typing import List, Dict, Any
 from oauth2client.service_account import ServiceAccountCredentials
 
 logger = getLogger(__name__)
+basicConfig(level=INFO)
 logger.setLevel(INFO)
 
 SCOPES = [

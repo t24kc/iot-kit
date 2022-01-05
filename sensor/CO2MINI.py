@@ -1,11 +1,12 @@
 import fcntl
 import threading
 import weakref
-from logging import getLogger, INFO
+from logging import getLogger, basicConfig, INFO
 from time import sleep
 from typing import List
 
 logger = getLogger(__name__)
+basicConfig(level=INFO)
 logger.setLevel(INFO)
 
 CO2METER_CO2 = 0x50

@@ -1,13 +1,14 @@
 import os
 import time
 import requests
-from logging import getLogger, INFO
+from logging import getLogger, basicConfig, INFO
 from typing import List, Set, Any, Optional, Dict
 from httplib2 import Http
 from oauth2client import file, client, tools
 from googleapiclient.discovery import build
 
 logger = getLogger(__name__)
+basicConfig(level=INFO)
 logger.setLevel(INFO)
 
 SCOPES = ["https://www.googleapis.com/auth/photoslibrary"]
