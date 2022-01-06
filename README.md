@@ -7,7 +7,7 @@ IoT kitchen garden system for using various sensors and Google Cloud services.
 Install linux package.
 ```zsh
 $ sudo apt-get update
-$ sudo apt-get install python-opencv
+$ sudo apt-get install python-opencv libatlas-base-dev
 ```
 Install python package.
 ```zsh
@@ -100,7 +100,7 @@ google:
       body: "Summary data of IoT sensor for the last week."
       scheduler:
         day_of_week: [ monday, tuesday, wednesday, thursday, friday, saturday, sunday ]
-        at_time: "9:00:00"
+        at_time: "09:00:00"
     alert:
       use: True
       subject: "[Alert] IoT Kitchen Garden"
@@ -136,7 +136,7 @@ module:
     scheduler:
       use: True
       day_of_week: [ monday, tuesday, wednesday, thursday, friday, saturday, sunday ]
-      at_time: "8:30:00"
+      at_time: "08:30:00"
     conditions:
       use: True
       # time to skip the turning on relay module (minutes)
@@ -157,7 +157,7 @@ module:
     use: True
     scheduler:
       day_of_week: [ monday, tuesday, wednesday, thursday, friday, saturday, sunday ]
-      at_time: "8:00:00"
+      at_time: "08:00:00"
 
 sensor:
   scheduler:

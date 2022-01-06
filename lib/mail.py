@@ -2,7 +2,7 @@ import os
 import time
 import base64
 import mimetypes
-from logging import getLogger, INFO
+from logging import getLogger, basicConfig, INFO
 from typing import Dict, Any
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -12,6 +12,7 @@ from oauth2client import file, client, tools
 from googleapiclient.discovery import build
 
 logger = getLogger(__name__)
+basicConfig(level=INFO)
 logger.setLevel(INFO)
 
 SCOPES = ["https://www.googleapis.com/auth/gmail.send"]

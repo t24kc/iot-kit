@@ -1,8 +1,9 @@
 import smbus2
-from logging import getLogger, INFO
+from logging import getLogger, basicConfig, INFO
 from time import sleep
 
 logger = getLogger(__name__)
+basicConfig(level=INFO)
 logger.setLevel(INFO)
 
 ADDRESS = 0x29
