@@ -109,8 +109,8 @@ class BH1750FVI(object):
         return (data[1] + (256 * data[0])) / 1.2
 
 
-def main() -> None:
-    """main function.
+def debug() -> None:
+    """debug function.
     """
     import argparse
     parser = argparse.ArgumentParser(description="Digital Light Sensor Script")
@@ -126,4 +126,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    debug()

@@ -73,8 +73,8 @@ class WebCameraModule(object):
         return result
 
 
-def main() -> None:
-    """main function.
+def debug() -> None:
+    """debug function.
     """
     import argparse, os
     parser = argparse.ArgumentParser(description="Web camera module script")
@@ -101,4 +101,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    debug()

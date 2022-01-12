@@ -113,8 +113,8 @@ class CO2MINI(object):
         return self._values[CO2METER_HUM] / 100.0
 
 
-def main() -> None:
-    """main function.
+def debug() -> None:
+    """debug function.
     """
     import argparse
     parser = argparse.ArgumentParser(description="CO2 Sensor Script")
@@ -133,4 +133,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    debug()

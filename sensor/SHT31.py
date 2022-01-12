@@ -101,8 +101,8 @@ class SHT31(object):
         self._bus.write_i2c_block_data(self._address, register, data)
 
 
-def main() -> None:
-    """main function.
+def debug() -> None:
+    """debug function.
     """
     import argparse
     parser = argparse.ArgumentParser(
@@ -121,4 +121,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    debug()

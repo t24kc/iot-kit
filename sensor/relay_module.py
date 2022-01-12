@@ -52,8 +52,8 @@ class RelayModule(object):
         GPIO.cleanup()
 
 
-def main() -> None:
-    """main function.
+def debug() -> None:
+    """debug function.
     """
     import argparse
     parser = argparse.ArgumentParser(description="Relay module script")
@@ -71,4 +71,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    debug()
