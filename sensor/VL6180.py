@@ -182,7 +182,9 @@ class VL6180X(object):
         self._bus.write_i2c_block_data(self._address, a1, [a0, d1, d0])
 
 
-def main():
+def main() -> None:
+    """main function.
+    """
     import argparse
     parser = argparse.ArgumentParser(description="Infrared Distance Sensor Script")
     parser.add_argument(

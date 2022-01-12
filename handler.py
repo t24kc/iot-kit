@@ -473,6 +473,7 @@ class Scheduler(object):
         self._photo_library_client.upload_image(album_id, photo_image_path)
 
         os.remove(photo_image_path)
+        logger.info(f"Succeeded removed a photo. remove_path: {photo_image_path}")
 
 
 def main() -> None:

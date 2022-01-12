@@ -50,3 +50,25 @@ class RelayModule(object):
         """
         logger.info(f"cleanup relay module.")
         GPIO.cleanup()
+
+
+def main() -> None:
+    """main function.
+    """
+    import argparse
+    parser = argparse.ArgumentParser(description="Relay module script")
+    parser.add_argument(
+        "-i", "--interval", type=int, default=10, help="set relay module turn on seconds"
+    )
+    args = parser.parse_args()
+
+    relay_module = RelayModule()
+    try:
+        relay_module.setup()
+        relay_module.turn_on(args.interval)
+    except KeyboardInterrupt:
+        relay_module.cleanup()
+
+
+if __name__ == "__main__":
+    main()

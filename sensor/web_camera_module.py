@@ -68,6 +68,37 @@ class WebCameraModule(object):
         result = cv2.imwrite(save_path, img)
         cap.release()
         cv2.destroyAllWindows()
-        logger.info("Succeeded in saving a photo with web camera.")
+        logger.info(f"Succeeded in saving a photo with web camera. save_path: {save_path}")
 
         return result
+
+
+def main() -> None:
+    """main function.
+    """
+    import argparse, os
+    parser = argparse.ArgumentParser(description="Web camera module script")
+    parser.add_argument(
+        "--fourcc", type=str, default=None, help="set video capture frame fourcc (MJPG, YUYV, H264, etc)"
+    )
+    parser.add_argument(
+        "--width", type=int, default=7680, help="set video capture frame width (1280, 1920, 3840, etc)"
+    )
+    parser.add_argument(
+        "--height", type=int, default=4320, help="set video capture frame height (720, 1080, 2160, etc)"
+    )
+    parser.add_argument(
+        "--fps", type=int, default=None, help="set video capture frame fps (15, 30, 60, etc)"
+    )
+    args = parser.parse_args()
+    settings = {"fourcc": args.fourcc, "width": args.width, "height": args.height, "fps": args.fps}
+    save_dir = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../img"))
+    current_datetime = datetime.now().strftime("%Y%m%d_%H%M")
+    save_path = f"{save_dir}/webcam_{current_datetime}.jpg"
+
+    web_camera_module = WebCameraModule()
+    web_camera_module.save_photo(save_path, settings)
+
+
+if __name__ == "__main__":
+    main()

@@ -101,7 +101,9 @@ class SHT31(object):
         self._bus.write_i2c_block_data(self._address, register, data)
 
 
-def main():
+def main() -> None:
+    """main function.
+    """
     import argparse
     parser = argparse.ArgumentParser(
         description="Temperature and Humidity Sensor Script"

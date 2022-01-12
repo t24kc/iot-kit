@@ -109,7 +109,9 @@ class BH1750FVI(object):
         return (data[1] + (256 * data[0])) / 1.2
 
 
-def main():
+def main() -> None:
+    """main function.
+    """
     import argparse
     parser = argparse.ArgumentParser(description="Digital Light Sensor Script")
     parser.add_argument(
