@@ -68,7 +68,7 @@ LABEL="co2mini_end"
 
 # Usage
 ## Update config
-Update config file `config.yaml` in advance.
+Update config file `config.yaml` in advance. Change unused sensors and modules to `use: False`.
 - https://github.com/t24kc/iot-kitchen-garden/blob/main/config.yaml
 ```yaml
 google:
@@ -78,11 +78,11 @@ google:
     # client secrets path
     client_secrets_path: .gcp/client_secrets.json
   spread_sheet:
-    use: True
+    use: True # or False
     # spreadsheet id
     id: dummy # TODO update
   photo_library:
-    use: True
+    use: True # or False
     # photo library token path
     token_path: .gcp/photo_token.json
     # google photo album name
@@ -95,14 +95,14 @@ google:
     # email address to send
     to_address: dummy # TODO update
     summary:
-      use: True
+      use: True # or False
       subject: "[Summary] IoT Kitchen Garden"
       body: "Summary data of IoT sensor for the last week."
       scheduler:
         day_of_week: [ monday, tuesday, wednesday, thursday, friday, saturday, sunday ]
         at_time: "09:00:00"
     alert:
-      use: True
+      use: True # or False
       subject: "[Alert] IoT Kitchen Garden"
       body:
         # {name}, {threshold}, {value}, {unit} will be converted
@@ -134,11 +134,11 @@ module:
     # time to turn on water (seconds)
     turn_on_time: 10
     scheduler:
-      use: True
+      use: True # or False
       day_of_week: [ monday, tuesday, wednesday, thursday, friday, saturday, sunday ]
       at_time: "08:30:00"
     conditions:
-      use: True
+      use: True # or False
       # time to skip the turning on relay module (minutes)
       skip_interval_minutes: 720
       # available filters.name [ light, temperature, humidity, co2, distance ]
@@ -154,10 +154,16 @@ module:
           threshold: 35
   # web camera module
   web_camera_module:
-    use: True
+    use: True # or False
     scheduler:
       day_of_week: [ monday, tuesday, wednesday, thursday, friday, saturday, sunday ]
       at_time: "08:00:00"
+    # video capture frame settings
+    settings:
+      width: 7680
+      height: 4320
+      fourcc: null # MJPG, YUYV, H264, etc
+      fps: null # 15, 30, 60, etc
 
 sensor:
   scheduler:
@@ -165,16 +171,16 @@ sensor:
     interval_minutes: 10
   # light sensor
   bh1750fvi:
-    use: True
+    use: True # or False
   # temperature, humidity sensor
   sft31:
-    use: True
+    use: True # or False
   # co2, temperature, humidity sensor
   co2mini:
-    use: True
+    use: True # or False
   # distance, light sensor
   vl6180:
-    use: True
+    use: True # or False
 ```
 
 ## Run Script

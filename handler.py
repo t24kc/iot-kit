@@ -459,7 +459,8 @@ class Scheduler(object):
 
         current_datetime = datetime.now().strftime("%Y%m%d_%H%M")
         photo_image_path = f"{self._config['google']['photo_library']['img_dir']}/webcam_{current_datetime}.jpg"
-        result = self._web_camera_module.save_photo(photo_image_path)
+        settings = self._config["module"]["web_camera_module"]["settings"]
+        result = self._web_camera_module.save_photo(photo_image_path, settings)
         if not result or not self.is_use_flag("google", "photo_library"):
             return
 
@@ -477,8 +478,7 @@ class Scheduler(object):
 def main() -> None:
     """main function.
     """
-    with open("config.yaml") as file:
-        config = yaml.full_load(file)
+    config = _full_load_config()
 
     scheduler = Scheduler(config)
     _create_scheduler_job(scheduler.monitoring_job, config["sensor"]["scheduler"])
@@ -500,12 +500,24 @@ def main() -> None:
 def cleanup() -> None:
     """turn off water and cleanup function.
     """
-    with open("config.yaml") as file:
-        config = yaml.full_load(file)
+    config = _full_load_config()
 
     scheduler = Scheduler(config)
     scheduler.turn_off_water()
     scheduler.cleanup()
+
+
+def _full_load_config(config_path: str = "config.yaml") -> Dict:
+    """Return full loaded config.
+
+    Args:
+        config_path:
+
+    Returns:
+        Config Dict
+    """
+    with open(config_path) as file:
+        return yaml.full_load(file)
 
 
 def _create_scheduler_job(callback_job: object, scheduler_config: Dict) -> None:
