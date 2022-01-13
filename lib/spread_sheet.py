@@ -166,3 +166,36 @@ class SpreadSheet(object):
         )
         logger.info("Cleared all rows in the spreadsheet.")
         return response
+
+
+def debug() -> None:
+    """debug function.
+    """
+    import argparse, os, yaml
+
+    parent_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+    os.chdir(parent_dir)
+    with open(f"config.yaml") as f:
+        config = yaml.full_load(f)
+
+    default_input_text = "test"
+    parser = argparse.ArgumentParser(description="Google Spread Sheet Script")
+    parser.add_argument(
+        "-s", "--spread-sheet-id", type=str, default=config["google"]["spread_sheet"]["id"],
+        help=f"set spread sheet id (default {config['google']['spread_sheet']['id']})",
+    )
+    parser.add_argument(
+        "-t", "--input-text", type=str, default=default_input_text,
+        help=f"set spread sheet input text (default {default_input_text})",
+    )
+    args = parser.parse_args()
+
+    spread_sheet_client = SpreadSheet(
+        config["google"]["default"]["service_account_path"],
+        args.spread_sheet_id,
+    )
+    spread_sheet_client.append_row([args.input_text])
+
+
+if __name__ == "__main__":
+    debug()

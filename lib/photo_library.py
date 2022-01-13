@@ -25,7 +25,7 @@ class PhotoLibrary(object):
         """
         self._client_secrets_path = client_secrets_path
         self._token_path = token_path
-        self._flags = tools.argparser.parse_args()
+        self._flags, _ = tools.argparser.parse_known_args()
         self._flags.noauth_local_webserver = True
 
     def _get_service(self) -> Any:
@@ -170,6 +170,10 @@ class PhotoLibrary(object):
         Returns:
             Returns whether the image could be uploaded.
         """
+        if not os.path.isfile(image_path):
+            logger.error("Image not exists.")
+            return False
+
         # Use requests because python service api does not support.
         url = "https://photoslibrary.googleapis.com/v1/uploads"
         headers = {
@@ -202,3 +206,33 @@ class PhotoLibrary(object):
         status = response["newMediaItemResults"][0]["status"]
         logger.info(f"Succeeded upload of image to photo library. status: {status}")
         return True
+
+
+def debug() -> None:
+    """debug function.
+    """
+    import os, yaml
+    from pathlib import Path
+
+    parent_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+    os.chdir(parent_dir)
+    with open("config.yaml") as f:
+        config = yaml.full_load(f)
+
+    photo_library_client = PhotoLibrary(
+        config["google"]["default"]["client_secrets_path"],
+        config["google"]["photo_library"]["token_path"],
+    )
+    album_title = config["google"]["photo_library"]["album_title"]
+    album = photo_library_client.get_album(album_title)
+    if album:
+        album_id = album["id"]
+    else:
+        album_id = photo_library_client.create_album(album_title)
+
+    for image_path in Path(f"{parent_dir}/img").glob("?*.?*"):
+        photo_library_client.upload_image(album_id, str(image_path))
+
+
+if __name__ == "__main__":
+    debug()
