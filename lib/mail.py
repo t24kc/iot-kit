@@ -29,7 +29,7 @@ class Mail(object):
         """
         self._client_secrets_path = client_secrets_path
         self._token_path = token_path
-        self._flags = tools.argparser.parse_args()
+        self._flags, _ = tools.argparser.parse_known_args()
         self._flags.noauth_local_webserver = True
 
     def _get_service(self) -> Any:
@@ -142,3 +142,43 @@ class Mail(object):
         return self._execute_api(
             self._get_service().users().messages().send(userId="me", body=body)
         )
+
+
+def debug() -> None:
+    """debug function.
+    """
+    import argparse, os, yaml
+
+    parent_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+    os.chdir(parent_dir)
+    with open(f"config.yaml") as f:
+        config = yaml.full_load(f)
+
+    default_subject = "test subject"
+    default_body = "test body"
+    parser = argparse.ArgumentParser(description="Google Mail Script")
+    parser.add_argument(
+        "-a", "--address", type=str, default=config["google"]["mail"]["to_address"],
+        help=f"set send mail address (default {config['google']['mail']['to_address']})",
+    )
+    parser.add_argument(
+        "-s", "--subject", type=str, default=default_subject,
+        help=f"set send mail subject (default {default_subject})",
+    )
+    parser.add_argument(
+        "-b", "--body", type=str, default=default_body,
+        help=f"set send mail body (default {default_body})",
+    )
+    args = parser.parse_args()
+
+    mail_client = Mail(
+        config["google"]["default"]["client_secrets_path"],
+        config["google"]["mail"]["token_path"],
+    )
+    message = mail_client.create_message(args.address, args.subject, args.body)
+    mail_client.send_message(message)
+    logger.info(args.body)
+
+
+if __name__ == "__main__":
+    debug()
