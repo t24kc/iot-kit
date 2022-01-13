@@ -76,25 +76,35 @@ class WebCameraModule(object):
 def debug() -> None:
     """debug function.
     """
-    import argparse, os
+    import argparse, os, yaml
+
+    parent_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+    os.chdir(parent_dir)
+    with open(f"config.yaml") as f:
+        config = yaml.full_load(f)
+
     parser = argparse.ArgumentParser(description="Web camera module script")
     parser.add_argument(
-        "--fourcc", type=str, default=None, help="set video capture frame fourcc (MJPG, YUYV, H264, etc)"
+        "--fourcc", type=str, default=config["module"]["web_camera_module"]["settings"]["fourcc"],
+        help="set video capture frame fourcc (MJPG, YUYV, H264, etc)"
     )
     parser.add_argument(
-        "--width", type=int, default=7680, help="set video capture frame width (1280, 1920, 3840, etc)"
+        "--width", type=int, default=config["module"]["web_camera_module"]["settings"]["width"],
+        help="set video capture frame width (1280, 1920, 3840, etc)"
     )
     parser.add_argument(
-        "--height", type=int, default=4320, help="set video capture frame height (720, 1080, 2160, etc)"
+        "--height", type=int, default=config["module"]["web_camera_module"]["settings"]["height"],
+        help="set video capture frame height (720, 1080, 2160, etc)"
     )
     parser.add_argument(
-        "--fps", type=int, default=None, help="set video capture frame fps (15, 30, 60, etc)"
+        "--fps", type=int, default=config["module"]["web_camera_module"]["settings"]["fps"],
+        help="set video capture frame fps (15, 30, 60, etc)"
     )
     args = parser.parse_args()
+
     settings = {"fourcc": args.fourcc, "width": args.width, "height": args.height, "fps": args.fps}
-    save_dir = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../img"))
     current_datetime = datetime.now().strftime("%Y%m%d_%H%M")
-    save_path = f"{save_dir}/webcam_{current_datetime}.jpg"
+    save_path = f"img/webcam_{current_datetime}.jpg"
 
     web_camera_module = WebCameraModule()
     web_camera_module.save_photo(save_path, settings)
