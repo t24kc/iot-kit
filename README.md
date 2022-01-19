@@ -164,6 +164,7 @@ module:
       height: 4320
       fourcc: null # MJPG, YUYV, H264, etc
       fps: null # 15, 30, 60, etc
+      focus: null # 0 ~ 255
 
 sensor:
   scheduler:

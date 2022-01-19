@@ -22,7 +22,15 @@ class WebCameraModule(object):
         logger.info("web camera module is starting...")
 
     @staticmethod
-    def decode_fourcc(v):
+    def decode_fourcc(v) -> str:
+        """Decode function to fourcc string.
+
+        Args:
+            v: frame fourcc number
+
+        Returns:
+            frame fourcc string
+        """
         v = int(v)
         return "".join([chr((v >> 8 * i) & 0xFF) for i in range(4)])
 
@@ -47,9 +55,11 @@ class WebCameraModule(object):
             cap.set(cv2.CAP_PROP_FRAME_HEIGHT, settings["height"])
         if "fps" in settings and settings["fps"]:
             cap.set(cv2.CAP_PROP_FPS, settings["fps"])
+        if "focus" in settings and settings["focus"]:
+            cap.set(cv2.CAP_PROP_FOCUS, settings["focus"])
 
         logger.info(f"fourcc: {self.decode_fourcc(cap.get(cv2.CAP_PROP_FOURCC))}, width: {cap.get(cv2.CAP_PROP_FRAME_WIDTH)}, "
-                    f"height: {cap.get(cv2.CAP_PROP_FRAME_HEIGHT)}, fps: {cap.get(cv2.CAP_PROP_FPS)}")
+                    f"height: {cap.get(cv2.CAP_PROP_FRAME_HEIGHT)}, fps: {cap.get(cv2.CAP_PROP_FPS)}, focus: {cap.get(cv2.CAP_PROP_FOCUS)}")
 
         is_opened = cap.isOpened()
         if not is_opened:
@@ -100,9 +110,13 @@ def debug() -> None:
         "--fps", type=int, default=config["module"]["web_camera_module"]["settings"]["fps"],
         help="set video capture frame fps (15, 30, 60, etc)"
     )
+    parser.add_argument(
+        "--focus", type=int, default=config["module"]["web_camera_module"]["settings"]["focus"],
+        help="set video capture frame focus (0 ~ 255)"
+    )
     args = parser.parse_args()
 
-    settings = {"fourcc": args.fourcc, "width": args.width, "height": args.height, "fps": args.fps}
+    settings = {"fourcc": args.fourcc, "width": args.width, "height": args.height, "fps": args.fps, "focus": args.focus}
     current_datetime = datetime.now().strftime("%Y%m%d_%H%M")
     save_path = f"img/webcam_{current_datetime}.jpg"
 

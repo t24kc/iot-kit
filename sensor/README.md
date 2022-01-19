@@ -77,7 +77,7 @@ Web camera module script.
 ```zsh
 $ python3 web_camera_module.py --help
 usage: web_camera_module.py [-h] [--fourcc FOURCC] [--width WIDTH]
-                            [--height HEIGHT] [--fps FPS]
+                            [--height HEIGHT] [--fps FPS] [--focus FOCUS]
 
 Web camera module script
 
@@ -87,4 +87,5 @@ optional arguments:
   --width WIDTH    set video capture frame width (1280, 1920, 3840, etc)
   --height HEIGHT  set video capture frame height (720, 1080, 2160, etc)
   --fps FPS        set video capture frame fps (15, 30, 60, etc)
+  --focus FOCUS    set video capture frame focus (0 ~ 255)
 ```
