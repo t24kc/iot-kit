@@ -1,4 +1,8 @@
 # iot-kitchen-garden
+![raspberry pi model](https://img.shields.io/badge/Raspberry%20Pi%20Model-3B%2B%20%7C%204B-red)
+![python](https://img.shields.io/badge/python-3.7-blue)
+![release](https://img.shields.io/github/v/release/t24kc/iot-kitchen-garden)
+
 IoT kitchen garden system for using various sensors and Google Cloud services.
 
 
