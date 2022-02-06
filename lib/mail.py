@@ -3,7 +3,7 @@ import time
 import base64
 import mimetypes
 from logging import getLogger, basicConfig, INFO
-from typing import Dict, Any
+from typing import Dict, List, Any
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.image import MIMEImage
@@ -92,7 +92,7 @@ class Mail(object):
 
     @staticmethod
     def create_message_with_image(
-        to: str, subject: str, body: str, file_path: str
+        to: str, subject: str, body: str, file_path_list: List[str]
     ) -> Dict:
         """Create email message with image.
 
@@ -100,7 +100,7 @@ class Mail(object):
             to: email message to
             subject: email message subject
             body: email message body
-            file_path: email image file path
+            file_path_list: email image file path list
 
         Returns:
             A raw data for email.mime.multipart decode dict.
@@ -113,19 +113,19 @@ class Mail(object):
         msg = MIMEText(body)
         message.attach(msg)
 
-        content_type, encoding = mimetypes.guess_type(file_path)
+        content_type, encoding = mimetypes.guess_type(file_path_list[0])
         if content_type is None or encoding is not None:
             content_type = "application/octet-stream"
         main_type, sub_type = content_type.split("/", 1)
         assert main_type == "image", "type is not image"
 
-        with open(file_path, "rb") as fp:
-            msg = MIMEImage(fp.read(), _subtype=sub_type)
-
-        msg.add_header(
-            "Content-Disposition", "attachment", filename=os.path.basename(file_path)
-        )
-        message.attach(msg)
+        for file_path in file_path_list:
+            with open(file_path, "rb") as fp:
+                msg = MIMEImage(fp.read(), _subtype=sub_type)
+            msg.add_header(
+                "Content-Disposition", "attachment", filename=os.path.basename(file_path)
+            )
+            message.attach(msg)
 
         byte_msg = message.as_string().encode()
         return {"raw": base64.urlsafe_b64encode(byte_msg).decode()}
