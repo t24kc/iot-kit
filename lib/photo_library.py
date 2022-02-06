@@ -1,5 +1,6 @@
 import os
 import time
+import re
 import requests
 from logging import getLogger, basicConfig, INFO
 from typing import List, Set, Any, Optional, Dict
@@ -152,7 +153,7 @@ class PhotoLibrary(object):
                 break
             for media in response["mediaItems"]:
                 file_name = media["filename"]
-                if not filter_name or filter_name in file_name:
+                if not filter_name or re.match(filter_name, file_name):
                     media_set.add(file_name)
             if "nextPageToken" not in response:
                 break
@@ -230,7 +231,7 @@ def debug() -> None:
     else:
         album_id = photo_library_client.create_album(album_title)
 
-    for image_path in Path(f"{parent_dir}/img").glob("?*.?*"):
+    for image_path in Path(config["google"]["photo_library"]["img_dir"]).glob("?*.?*"):
         photo_library_client.upload_image(album_id, str(image_path))
 
 

@@ -90,7 +90,7 @@ def debug() -> None:
 
     parent_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
     os.chdir(parent_dir)
-    with open(f"config.yaml") as f:
+    with open("config.yaml") as f:
         config = yaml.full_load(f)
 
     parser = argparse.ArgumentParser(description="Web camera module script")
@@ -118,7 +118,7 @@ def debug() -> None:
 
     settings = {"fourcc": args.fourcc, "width": args.width, "height": args.height, "fps": args.fps, "focus": args.focus}
     current_datetime = datetime.now().strftime("%Y%m%d_%H%M")
-    save_path = f"img/webcam_{current_datetime}.jpg"
+    save_path = f"{config['google']['photo_library']['img_dir']}/webcam_{current_datetime}.jpg"
 
     web_camera_module = WebCameraModule()
     web_camera_module.save_photo(save_path, settings)
