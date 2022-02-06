@@ -3,7 +3,7 @@ import time
 import re
 import requests
 from logging import getLogger, basicConfig, INFO
-from typing import List, Set, Any, Optional, Dict
+from typing import List, Dict, Optional, Any
 from httplib2 import Http
 from oauth2client import file, client, tools
 from googleapiclient.discovery import build
@@ -127,17 +127,17 @@ class PhotoLibrary(object):
 
         return None
 
-    def get_media_set(self, album_id: str, filter_name: Optional[str] = None) -> Set:
-        """Return all album medias name set.
+    def get_media_dict(self, album_id: str, filter_name: Optional[str] = None) -> Dict:
+        """Return album media information dict.
 
         Args:
             album_id: Album ID
             filter_name: filter media name
 
         Returns:
-            All album medias name set.
+            Album media information dict.
         """
-        media_set = set()
+        media_dict = {}
         page_token = None
 
         while True:
@@ -154,12 +154,17 @@ class PhotoLibrary(object):
             for media in response["mediaItems"]:
                 file_name = media["filename"]
                 if not filter_name or re.match(filter_name, file_name):
-                    media_set.add(file_name)
+                    media_size = f"w{media['mediaMetadata']['width']}-h{media['mediaMetadata']['height']}"
+                    media_dict[file_name] = {
+                        "creation_time": media["mediaMetadata"]["creationTime"],
+                        "base_url": f"{media['baseUrl']}={media_size}",
+                        "product_url": media["productUrl"],
+                    }
             if "nextPageToken" not in response:
                 break
             page_token = response["nextPageToken"]
 
-        return media_set
+        return media_dict
 
     def upload_image(self, album_id: str, image_path: str) -> bool:
         """Upload images to album.
