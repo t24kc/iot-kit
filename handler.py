@@ -1,7 +1,8 @@
+import argparse
 import os
 import yaml
+import requests
 import schedule
-import argparse
 import matplotlib.pyplot as plt
 import pandas as pd
 from typing import List, Dict, Optional
@@ -314,7 +315,7 @@ class Scheduler(object):
             body += self._append_google_link_body(with_spread_sheet=True)
             self._send_mail(self._config["google"]["mail"]["alert"]["subject"], body)
 
-    def _append_google_link_body(self, with_spread_sheet=False, with_photo_library=False) -> str:
+    def _append_google_link_body(self, with_spread_sheet: bool = False, with_photo_library: bool = False) -> str:
         """Get Google service link urls for email message.
 
         Args:
@@ -335,20 +336,22 @@ class Scheduler(object):
 
         return body
 
-    def _send_mail(self, subject: str, body: str, image_file: str = None) -> None:
+    def _send_mail(self, subject: str, body: str, image_file_list: Optional[List[str]] = None) -> None:
         """Send the email.
 
         Args:
             subject: message subject
             body: message body
-            image_file: sending image file path
+            image_file_list: sending image file path
         """
         if not self.is_use_flag("google", "mail", "summary") and not self.is_use_flag("google", "mail", "alert"):
             return
 
-        if image_file and os.path.isfile(image_file):
+        if image_file_list:
+            for image_file in image_file_list:
+                assert os.path.isfile(image_file), "image not found."
             message = self._mail_client.create_message_with_image(
-                self._config["google"]["mail"]["to_address"], subject, body, image_file
+                self._config["google"]["mail"]["to_address"], subject, body, image_file_list
             )
         else:
             message = self._mail_client.create_message(
@@ -367,16 +370,22 @@ class Scheduler(object):
 
         graph_image_path = f"{self._config['google']['photo_library']['img_dir']}/graph.jpg"
         self._save_summary_graph(graph_image_path)
+        image_file_list = [graph_image_path]
 
-        body = self._config["google"]["mail"]["summary"]["body"] + "\n"
+        photo_image_path_list = self._save_photo_image()
+        image_file_list.extend(photo_image_path_list)
+
+        from_days = self._config["google"]["mail"]["summary"]["from_days"]
+        body = self._config["google"]["mail"]["summary"]["body"].format(from_days=from_days) + "\n"
         body += self._append_google_link_body(with_spread_sheet=True, with_photo_library=True)
         self._send_mail(
             self._config["google"]["mail"]["summary"]["subject"],
             body,
-            graph_image_path,
+            image_file_list,
         )
 
-        os.remove(graph_image_path)
+        for image_path in image_file_list:
+            os.remove(image_path)
 
     def _save_summary_graph(self, graph_image_path: str) -> bool:
         """Create the summary parameters graph image.
@@ -390,7 +399,7 @@ class Scheduler(object):
         if not self.is_use_flag("google", "spread_sheet"):
             return False
 
-        history_df = self._get_history_dataframe(from_days=7)
+        history_df = self._get_history_dataframe()
 
         kwargs = {"kind": "line", "use_index": True, "rot": 45}
         setting_list = []
@@ -417,11 +426,8 @@ class Scheduler(object):
         plt.savefig(graph_image_path)
         return True
 
-    def _get_history_dataframe(self, from_days: int) -> Optional[pd.DataFrame]:
+    def _get_history_dataframe(self) -> Optional[pd.DataFrame]:
         """Get the parameters' history dataframe by spreadsheet.
-
-        Args:
-            from_days: from days
 
         Returns:
             Dataframe of the diff days parameters' history.
@@ -438,10 +444,47 @@ class Scheduler(object):
             }
         )
 
-        target_date = (datetime.now() - timedelta(days=from_days)).strftime(
+        target_date = (datetime.now() - timedelta(days=self._config["google"]["mail"]["summary"]["from_days"])).strftime(
             "%Y-%m-%d %H:%M:%S"
         )
         return history_df.query(f"Time > '{target_date}'").reset_index(drop=True)
+
+    def _save_photo_image(self) -> List:
+        """Save Google Photo image to local storage and return the path list.
+
+        Returns:
+            Google Photo image path list
+        """
+        image_file_list = []
+        if not self.is_use_flag("google", "photo_library"):
+            return image_file_list
+
+        album_id = self._get_album_id()
+        filter_date_list = []
+        for days in range(self._config["google"]["mail"]["summary"]["from_days"]):
+            filter_date_list.append((datetime.now() - timedelta(days=days)).strftime("%Y%m%d"))
+        media_dict = self._photo_library_client.get_media_dict(
+            album_id, filter_name=f"webcam_({'|'.join(filter_date_list)})"
+        )
+
+        if not media_dict:
+            return image_file_list
+
+        sorted_name_list = sorted(media_dict.keys())
+        if len(sorted_name_list) == 1:
+            target_name_list = [sorted_name_list[0]]
+        else:
+            target_name_list = [sorted_name_list[0], sorted_name_list[-1]]
+
+        for filename in target_name_list:
+            response = requests.get(media_dict[filename]["base_url"])
+            assert response.status_code == 200
+            photo_image_path = f"{self._config['google']['photo_library']['img_dir']}/{filename}"
+            with open(photo_image_path, "wb") as f:
+                f.write(response.content)
+            image_file_list.append(photo_image_path)
+
+        return image_file_list
 
     def relay_module_job(self) -> None:
         """Create the relay module job to turn on water.
@@ -464,16 +507,29 @@ class Scheduler(object):
         if not result or not self.is_use_flag("google", "photo_library"):
             return
 
+        album_id = self._get_album_id()
+        self._photo_library_client.upload_image(album_id, photo_image_path)
+
+        os.remove(photo_image_path)
+        logger.info(f"Succeeded removed a photo. remove_path: {photo_image_path}")
+
+    def _get_album_id(self) -> Optional[str]:
+        """Get the target album id.
+
+        Returns:
+            Album ID
+        """
+        if not self.is_use_flag("google", "photo_library"):
+            return
+
         album_title = self._config["google"]["photo_library"]["album_title"]
         album = self._photo_library_client.get_album(album_title)
         if album:
             album_id = album["id"]
         else:
             album_id = self._photo_library_client.create_album(album_title)
-        self._photo_library_client.upload_image(album_id, photo_image_path)
 
-        os.remove(photo_image_path)
-        logger.info(f"Succeeded removed a photo. remove_path: {photo_image_path}")
+        return album_id
 
 
 def main() -> None:
