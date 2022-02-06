@@ -175,7 +175,7 @@ def debug() -> None:
 
     parent_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
     os.chdir(parent_dir)
-    with open(f"config.yaml") as f:
+    with open("config.yaml") as f:
         config = yaml.full_load(f)
 
     default_input_text = "test"

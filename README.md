@@ -101,7 +101,8 @@ google:
     summary:
       use: True # or False
       subject: "[Summary] IoT Kitchen Garden"
-      body: "Summary data of IoT sensor for the last week."
+      body: "Summary data of IoT sensor for the last {from_days} days."
+      from_days: 7
       scheduler:
         day_of_week: [ monday, tuesday, wednesday, thursday, friday, saturday, sunday ]
         at_time: "09:00:00"
