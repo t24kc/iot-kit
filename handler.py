@@ -546,12 +546,15 @@ def main() -> None:
     if scheduler.is_use_flag("module", "web_camera_module"):
         _create_scheduler_job(scheduler.web_camera_module_job, config["module"]["web_camera_module"]["scheduler"])
 
-    try:
-        while True:
+    while True:
+        try:
             schedule.run_pending()
             sleep(1)
-    except KeyboardInterrupt:
-        scheduler.cleanup()
+        except KeyboardInterrupt as e:
+            scheduler.cleanup()
+            raise e
+        except Exception as e:
+            logger.warning(e)
 
 
 def cleanup() -> None:
