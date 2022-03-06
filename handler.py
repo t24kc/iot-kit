@@ -554,7 +554,7 @@ def main() -> None:
             scheduler.cleanup()
             raise e
         except Exception as e:
-            logger.warning(e)
+            logger.error(e)
 
 
 def cleanup() -> None:
