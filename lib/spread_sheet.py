@@ -1,3 +1,4 @@
+import socket
 import time
 import gspread
 from logging import getLogger, basicConfig, INFO
@@ -39,6 +40,7 @@ class SpreadSheet(object):
         credentials = ServiceAccountCredentials.from_json_keyfile_name(
             self._service_account_path, SCOPES
         )
+        socket.setdefaulttimeout(300)
         return gspread.authorize(credentials).open_by_key(self._spread_sheet_key)
 
     @staticmethod

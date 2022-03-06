@@ -1,4 +1,5 @@
 import os
+import socket
 import time
 import base64
 import mimetypes
@@ -46,6 +47,7 @@ class Mail(object):
         if not token or token.invalid:
             flow = client.flow_from_clientsecrets(self._client_secrets_path, SCOPES)
             token = tools.run_flow(flow, store, self._flags)
+        socket.setdefaulttimeout(300)
         service = build("gmail", "v1", http=token.authorize(Http()))
 
         return service
