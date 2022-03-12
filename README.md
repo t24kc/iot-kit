@@ -105,7 +105,7 @@ google:
       from_days: 7
       scheduler:
         day_of_week: [ monday, tuesday, wednesday, thursday, friday, saturday, sunday ]
-        at_time: "09:00:00"
+        at_time: ["09:00:00"]
     alert:
       use: True # or False
       subject: "[Alert] IoT Kitchen Garden"
@@ -141,7 +141,7 @@ module:
     scheduler:
       use: True # or False
       day_of_week: [ monday, tuesday, wednesday, thursday, friday, saturday, sunday ]
-      at_time: "08:30:00"
+      at_time: ["08:30:00"]
     conditions:
       use: True # or False
       # time to skip the turning on relay module (minutes)
@@ -162,7 +162,7 @@ module:
     use: True # or False
     scheduler:
       day_of_week: [ monday, tuesday, wednesday, thursday, friday, saturday, sunday ]
-      at_time: "08:00:00"
+      at_time: ["08:00:00"]
     # video capture frame settings
     settings:
       width: 7680
@@ -179,7 +179,7 @@ sensor:
   bh1750fvi:
     use: True # or False
   # temperature, humidity sensor
-  sft31:
+  sht31:
     use: True # or False
   # co2, temperature, humidity sensor
   co2mini:
