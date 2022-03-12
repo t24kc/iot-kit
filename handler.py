@@ -48,7 +48,7 @@ class Scheduler(object):
         if self.is_use_flag("sensor", "bh1750fvi"):
             from sensor.BH1750FVI import BH1750FVI
             self._bh1750fvi_sensor = BH1750FVI()
-        if self.is_use_flag("sensor", "sft31"):
+        if self.is_use_flag("sensor", "sht31"):
             from sensor.SHT31 import SHT31
             self._sht31_sensor = SHT31()
         if self.is_use_flag("sensor", "co2mini"):
@@ -101,7 +101,7 @@ class Scheduler(object):
         if self.is_use_flag("sensor", "bh1750fvi"):
             if "light" not in self._params:
                 self._params["light"] = {"value": 0, "function": self._bh1750fvi_sensor.get_light}
-        if self.is_use_flag("sensor", "sft31"):
+        if self.is_use_flag("sensor", "sht31"):
             if "temperature" not in self._params:
                 self._params["temperature"] = {"value": 0, "function": self._sht31_sensor.get_temperature}
             if "humidity" not in self._params:
@@ -592,7 +592,9 @@ def _create_scheduler_job(callback_job: object, scheduler_config: Dict) -> None:
     elif "day_of_week" in scheduler_config:
         for day_of_week in scheduler_config["day_of_week"]:
             if "at_time" in scheduler_config:
-                getattr(schedule.every(), day_of_week).at(scheduler_config["at_time"]).do(callback_job)
+                at_time_list = [scheduler_config["at_time"]] if isinstance(scheduler_config["at_time"], str) else scheduler_config["at_time"]
+                for at_time in at_time_list:
+                    getattr(schedule.every(), day_of_week).at(at_time).do(callback_job)
             else:
                 getattr(schedule.every(), day_of_week).do(callback_job)
 
