@@ -136,8 +136,8 @@ google:
 module:
   # relay module
   relay_module:
-    # time to turn on water (seconds)
-    turn_on_time: 10
+    # time to turn on power (minutes)
+    turn_on_minutes: 0.5
     scheduler:
       use: True # or False
       day_of_week: [ monday, tuesday, wednesday, thursday, friday, saturday, sunday ]
@@ -184,6 +184,7 @@ sensor:
   # co2, temperature, humidity sensor
   co2mini:
     use: True # or False
+    decrypt: False # or True
   # distance, light sensor
   vl6180:
     use: True # or False
@@ -191,6 +192,7 @@ sensor:
 
 ## Run Script
 script usage.
+- https://t24kc.github.io/iot-kitchen-garden/handler.html
 ```zsh
 $ python3 handler.py --help
 usage: handler.py [-h] [-f FUNCTION]

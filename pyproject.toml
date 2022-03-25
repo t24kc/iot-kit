@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "iot-kitchen-garden"
-version = "0.1.9"
+version = "0.2.0"
 description = "IoT kitchen garden system for using various sensors and Google Cloud services."
 authors = ["Takashi Suzuki <you@example.com>"]
 license = ""
@@ -19,6 +19,8 @@ opencv-python = "4.1.0.25"
 "RPi.GPIO" = "^0.7.0"
 
 [tool.poetry.dev-dependencies]
+Sphinx = "^4.4.0"
+sphinx-rtd-theme = "^1.0.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

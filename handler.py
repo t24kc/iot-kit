@@ -27,7 +27,7 @@ class Scheduler(object):
         "humidity": {"name": "Humidity(%)", "type": float, "unit": "%"},
         "co2": {"name": "CO2(ppm)", "type": float, "unit": "ppm"},
         "distance": {"name": "Distance(mm)", "type": float, "unit": "mm"},
-        "water_flag": {"name": "WaterFlag", "type": int, "unit": ""},
+        "power_flag": {"name": "PowerFlag", "type": int, "unit": ""},
     }
 
     def __init__(self, config: Dict) -> None:
@@ -53,7 +53,7 @@ class Scheduler(object):
             self._sht31_sensor = SHT31()
         if self.is_use_flag("sensor", "co2mini"):
             from sensor.CO2MINI import CO2MINI
-            self._co2mini_sensor = CO2MINI()
+            self._co2mini_sensor = CO2MINI(self._config["sensor"]["co2mini"]["decrypt"])
         if self.is_use_flag("sensor", "vl6180"):
             from sensor.VL6180 import VL6180X
             self._vl6180x_sensor = VL6180X()
@@ -154,7 +154,7 @@ class Scheduler(object):
 
         used_params = ["time"] + list(self._params.keys())
         if self.is_use_flag("module", "relay_module", "conditions"):
-            used_params.append("water_flag")
+            used_params.append("power_flag")
 
         return used_params
 
@@ -164,8 +164,8 @@ class Scheduler(object):
         self._reduce_interval_minutes()
         self._fetch_params()
         self._logging_spread_sheet()
-        if self._is_water_flag():
-            self._turn_on_water()
+        if self._is_power_flag():
+            self._turn_on_power()
         if self._is_alert_flag():
             self._alert_mail()
 
@@ -194,15 +194,15 @@ class Scheduler(object):
         current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         append_rows = [current_datetime] + [round(self._params[key]["value"], 1) for key in self._params.keys()]
         if self.is_use_flag("module", "relay_module", "conditions"):
-            append_rows.append(int(self._is_water_flag()))
+            append_rows.append(int(self._is_power_flag()))
 
         self._spread_sheet_client.append_row(append_rows)
 
-    def _is_water_flag(self) -> bool:
-        """Get whether the water flag.
+    def _is_power_flag(self) -> bool:
+        """Get whether the power flag.
 
         Returns:
-            A boolean if the water flag.
+            A boolean if the power flag.
         """
         if not self.is_use_flag("module", "relay_module", "conditions"):
             return False
@@ -223,19 +223,19 @@ class Scheduler(object):
 
         return False
 
-    def _turn_on_water(self) -> None:
-        """Turn on water by relay module.
+    def _turn_on_power(self) -> None:
+        """Turn on power by relay module.
         """
         if not self.is_use_flag("module", "relay_module", "scheduler") \
                 and not self.is_use_flag("module", "relay_module", "conditions"):
             return
 
         self._relay_module.setup()
-        self._relay_module.turn_on(self._config["module"]["relay_module"]["turn_on_time"])
+        self._relay_module.turn_on(self._config["module"]["relay_module"]["turn_on_minutes"])
         self._interval_minutes["relay_module"] = self._config["module"]["relay_module"]["conditions"]["skip_interval_minutes"]
 
-    def turn_off_water(self) -> None:
-        """Turn off water by relay module.
+    def turn_off_power(self) -> None:
+        """Turn off power by relay module.
         """
         if not self.is_use_flag("module", "relay_module", "scheduler") \
                 and not self.is_use_flag("module", "relay_module", "conditions"):
@@ -487,12 +487,12 @@ class Scheduler(object):
         return image_file_list
 
     def relay_module_job(self) -> None:
-        """Create the relay module job to turn on water.
+        """Create the relay module job to turn on power.
         """
         if not self.is_use_flag("module", "relay_module", "scheduler"):
             return
 
-        self._turn_on_water()
+        self._turn_on_power()
 
     def web_camera_module_job(self) -> None:
         """Create the web camera module job to take a photo.
@@ -558,12 +558,12 @@ def main() -> None:
 
 
 def cleanup() -> None:
-    """turn off water and cleanup function.
+    """turn off power and cleanup function.
     """
     config = _full_load_config()
 
     scheduler = Scheduler(config)
-    scheduler.turn_off_water()
+    scheduler.turn_off_power()
     scheduler.cleanup()
 
 
