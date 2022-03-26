@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sensor package &mdash; iot-kitchen-garden 0.2.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="lib package" href="lib.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> iot-kitchen-garden
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="handler.html">handler module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lib.html">lib package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">sensor package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sensor.BH1750FVI">sensor.BH1750FVI module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sensor.CO2MINI">sensor.CO2MINI module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sensor.SHT31">sensor.SHT31 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sensor.VL6180">sensor.VL6180 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sensor-relay-module-module">sensor.relay_module module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sensor.web_camera_module">sensor.web_camera_module module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sensor">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">iot-kitchen-garden</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>sensor package</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sensor-package">
+<h1>sensor package<a class="headerlink" href="#sensor-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-sensor.BH1750FVI">
+<span id="sensor-bh1750fvi-module"></span><h2>sensor.BH1750FVI module<a class="headerlink" href="#module-sensor.BH1750FVI" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sensor.BH1750FVI.BH1750FVI">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sensor.BH1750FVI.</span></span><span class="sig-name descname"><span class="pre">BH1750FVI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">35</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensor.BH1750FVI.BH1750FVI" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Digital Light Sensor Client Object.
+See: <a class="reference external" href="https://docs.rs-online.com/f199/0900766b81539909.pdf">https://docs.rs-online.com/f199/0900766b81539909.pdf</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>address</strong> – digital light sensor address.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.BH1750FVI.BH1750FVI.convert_to_number">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">convert_to_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#sensor.BH1750FVI.BH1750FVI.convert_to_number" title="Permalink to this definition"></a></dt>
+<dd><p>Simple function to convert 2 bytes of data into a decimal number.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – sensor data list.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>convert to number from sensor data list.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.BH1750FVI.BH1750FVI.get_light">
+<span class="sig-name descname"><span class="pre">get_light</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">32</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#sensor.BH1750FVI.BH1750FVI.get_light" title="Permalink to this definition"></a></dt>
+<dd><p>Read the lux (light value) from the sensor and return it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>command</strong> – one time command</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Digital light sensor lux.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.BH1750FVI.BH1750FVI.power_down">
+<span class="sig-name descname"><span class="pre">power_down</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sensor.BH1750FVI.BH1750FVI.power_down" title="Permalink to this definition"></a></dt>
+<dd><p>Set digital light sensor to power down.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.BH1750FVI.BH1750FVI.power_on">
+<span class="sig-name descname"><span class="pre">power_on</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sensor.BH1750FVI.BH1750FVI.power_on" title="Permalink to this definition"></a></dt>
+<dd><p>Set digital light sensor to power on.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.BH1750FVI.BH1750FVI.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">register</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#sensor.BH1750FVI.BH1750FVI.read" title="Permalink to this definition"></a></dt>
+<dd><p>Read digital light sensor data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>register</strong> – command</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Digital light sensor data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.BH1750FVI.BH1750FVI.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sensor.BH1750FVI.BH1750FVI.reset" title="Permalink to this definition"></a></dt>
+<dd><p>Reset digital light sensor.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.BH1750FVI.BH1750FVI.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">register</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sensor.BH1750FVI.BH1750FVI.write" title="Permalink to this definition"></a></dt>
+<dd><p>Write byte digital light sensor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>register</strong> – command</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sensor.BH1750FVI.debug">
+<span class="sig-prename descclassname"><span class="pre">sensor.BH1750FVI.</span></span><span class="sig-name descname"><span class="pre">debug</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sensor.BH1750FVI.debug" title="Permalink to this definition"></a></dt>
+<dd><p>debug function.</p>
+</dd></dl>
+
+</section>
+<section id="module-sensor.CO2MINI">
+<span id="sensor-co2mini-module"></span><h2>sensor.CO2MINI module<a class="headerlink" href="#module-sensor.CO2MINI" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sensor.CO2MINI.CO2MINI">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sensor.CO2MINI.</span></span><span class="sig-name descname"><span class="pre">CO2MINI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_decrypt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'/dev/hidraw0'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensor.CO2MINI.CO2MINI" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>CO2 Sensor Client Object.
+See: <a class="reference external" href="https://hackaday.io/project/5301-reverse-engineering-a-low-cost-usb-co-monitor/log/17909-all-your-base-are-belong-to-us">https://hackaday.io/project/5301-reverse-engineering-a-low-cost-usb-co-monitor/log/17909-all-your-base-are-belong-to-us</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>use_decrypt</strong> – use decrypt flag</p></li>
+<li><p><strong>device</strong> – USB device path</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.CO2MINI.CO2MINI.get_co2">
+<span class="sig-name descname"><span class="pre">get_co2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#sensor.CO2MINI.CO2MINI.get_co2" title="Permalink to this definition"></a></dt>
+<dd><p>Get CO2 data from sensor and return it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>co2 value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.CO2MINI.CO2MINI.get_humidity">
+<span class="sig-name descname"><span class="pre">get_humidity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#sensor.CO2MINI.CO2MINI.get_humidity" title="Permalink to this definition"></a></dt>
+<dd><p>Get humidity data from sensor and return it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>humidity value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.CO2MINI.CO2MINI.get_temperature">
+<span class="sig-name descname"><span class="pre">get_temperature</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#sensor.CO2MINI.CO2MINI.get_temperature" title="Permalink to this definition"></a></dt>
+<dd><p>Get temperature data from sensor and return it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>temperature value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.CO2MINI.CO2MINI.read_data">
+<span class="sig-name descname"><span class="pre">read_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#sensor.CO2MINI.CO2MINI.read_data" title="Permalink to this definition"></a></dt>
+<dd><p>Read CO2 Sensor data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Whether read data was possible.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sensor.CO2MINI.debug">
+<span class="sig-prename descclassname"><span class="pre">sensor.CO2MINI.</span></span><span class="sig-name descname"><span class="pre">debug</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sensor.CO2MINI.debug" title="Permalink to this definition"></a></dt>
+<dd><p>debug function.</p>
+</dd></dl>
+
+</section>
+<section id="module-sensor.SHT31">
+<span id="sensor-sht31-module"></span><h2>sensor.SHT31 module<a class="headerlink" href="#module-sensor.SHT31" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sensor.SHT31.SHT31">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sensor.SHT31.</span></span><span class="sig-name descname"><span class="pre">SHT31</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">68</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensor.SHT31.SHT31" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Temperature and Humidity Sensor Client Object.
+See: <a class="reference external" href="https://akizukidenshi.com/download/ds/sensirion/SHT31_20201119.pdf">https://akizukidenshi.com/download/ds/sensirion/SHT31_20201119.pdf</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>address</strong> – Temperature and Humidity Sensor address</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.SHT31.SHT31.get_humidity">
+<span class="sig-name descname"><span class="pre">get_humidity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#sensor.SHT31.SHT31.get_humidity" title="Permalink to this definition"></a></dt>
+<dd><p>Read the humidity from the sensor and return it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>humidity value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.SHT31.SHT31.get_temperature">
+<span class="sig-name descname"><span class="pre">get_temperature</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#sensor.SHT31.SHT31.get_temperature" title="Permalink to this definition"></a></dt>
+<dd><p>Read the temperature from the sensor and return it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>temperature value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.SHT31.SHT31.get_temperature_humidity">
+<span class="sig-name descname"><span class="pre">get_temperature_humidity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#sensor.SHT31.SHT31.get_temperature_humidity" title="Permalink to this definition"></a></dt>
+<dd><p>Read the temperature, humidity from the sensor and return it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>temperature, humidity value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.SHT31.SHT31.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">register</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#sensor.SHT31.SHT31.read" title="Permalink to this definition"></a></dt>
+<dd><p>Read and return a byte from the specified 16-bit register address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>register</strong> – sensor register address</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Temperature and Humidity Sensor data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.SHT31.SHT31.read_list">
+<span class="sig-name descname"><span class="pre">read_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">register</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#sensor.SHT31.SHT31.read_list" title="Permalink to this definition"></a></dt>
+<dd><p>Read and return a byte list from the specified 16-bit register address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>register</strong> – sensor register address</p></li>
+<li><p><strong>length</strong> – read byte length</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Temperature and Humidity Sensor data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.SHT31.SHT31.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">register</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sensor.SHT31.SHT31.write" title="Permalink to this definition"></a></dt>
+<dd><p>Write 1 byte of data from the specified 16-bit register address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>register</strong> – sensor register address</p></li>
+<li><p><strong>value</strong> – write data</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.SHT31.SHT31.write_list">
+<span class="sig-name descname"><span class="pre">write_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">register</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sensor.SHT31.SHT31.write_list" title="Permalink to this definition"></a></dt>
+<dd><p>Write 1 byte of data from the specified 16-bit register address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>register</strong> – sensor register address</p></li>
+<li><p><strong>data</strong> – write data</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sensor.SHT31.debug">
+<span class="sig-prename descclassname"><span class="pre">sensor.SHT31.</span></span><span class="sig-name descname"><span class="pre">debug</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sensor.SHT31.debug" title="Permalink to this definition"></a></dt>
+<dd><p>debug function.</p>
+</dd></dl>
+
+</section>
+<section id="module-sensor.VL6180">
+<span id="sensor-vl6180-module"></span><h2>sensor.VL6180 module<a class="headerlink" href="#module-sensor.VL6180" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sensor.VL6180.VL6180X">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sensor.VL6180.</span></span><span class="sig-name descname"><span class="pre">VL6180X</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">41</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensor.VL6180.VL6180X" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Infrared Distance Sensor Client Object.
+See: <a class="reference external" href="https://www.st.com/ja/imaging-and-photonics-solutions/vl6180x.html">https://www.st.com/ja/imaging-and-photonics-solutions/vl6180x.html</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>address</strong> – distance sensor address</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.VL6180.VL6180X.get_distance">
+<span class="sig-name descname"><span class="pre">get_distance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#sensor.VL6180.VL6180X.get_distance" title="Permalink to this definition"></a></dt>
+<dd><p>Read the range of an object in front of sensor and return it in mm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>distance value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.VL6180.VL6180X.get_light">
+<span class="sig-name descname"><span class="pre">get_light</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#sensor.VL6180.VL6180X.get_light" title="Permalink to this definition"></a></dt>
+<dd><p>Read the lux (light value) from the sensor and return it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>lux value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.VL6180.VL6180X.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">register16</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#sensor.VL6180.VL6180X.read" title="Permalink to this definition"></a></dt>
+<dd><p>Read and return a byte from the specified 16-bit register address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>register16</strong> – sensor register address</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Infrared Distance Sensor data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.VL6180.VL6180X.read16">
+<span class="sig-name descname"><span class="pre">read16</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">register16</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#sensor.VL6180.VL6180X.read16" title="Permalink to this definition"></a></dt>
+<dd><p>Read and return a 16-bit unsigned big endian value read from the specified 16-bit register address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>register16</strong> – sensor register address</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Infrared Distance Sensor data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.VL6180.VL6180X.write_byte">
+<span class="sig-name descname"><span class="pre">write_byte</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">register16</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sensor.VL6180.VL6180X.write_byte" title="Permalink to this definition"></a></dt>
+<dd><p>Write 1 byte of data from the specified 16-bit register address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>register16</strong> – sensor register address</p></li>
+<li><p><strong>data</strong> – write data</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.VL6180.VL6180X.write_byte16">
+<span class="sig-name descname"><span class="pre">write_byte16</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">register16</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data16</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sensor.VL6180.VL6180X.write_byte16" title="Permalink to this definition"></a></dt>
+<dd><p>Write a 16-bit big endian value to the specified 16-bit register address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>register16</strong> – sensor register address</p></li>
+<li><p><strong>data16</strong> – write data</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sensor.VL6180.debug">
+<span class="sig-prename descclassname"><span class="pre">sensor.VL6180.</span></span><span class="sig-name descname"><span class="pre">debug</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sensor.VL6180.debug" title="Permalink to this definition"></a></dt>
+<dd><p>debug function.</p>
+</dd></dl>
+
+</section>
+<section id="sensor-relay-module-module">
+<h2>sensor.relay_module module<a class="headerlink" href="#sensor-relay-module-module" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-sensor.web_camera_module">
+<span id="sensor-web-camera-module-module"></span><h2>sensor.web_camera_module module<a class="headerlink" href="#module-sensor.web_camera_module" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sensor.web_camera_module.WebCameraModule">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sensor.web_camera_module.</span></span><span class="sig-name descname"><span class="pre">WebCameraModule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensor.web_camera_module.WebCameraModule" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Web Camera Client Object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>device_id</strong> – device id</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.web_camera_module.WebCameraModule.decode_fourcc">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">decode_fourcc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#sensor.web_camera_module.WebCameraModule.decode_fourcc" title="Permalink to this definition"></a></dt>
+<dd><p>Decode function to fourcc string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> – frame fourcc number</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>frame fourcc string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sensor.web_camera_module.WebCameraModule.save_photo">
+<span class="sig-name descname"><span class="pre">save_photo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_datetime</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#sensor.web_camera_module.WebCameraModule.save_photo" title="Permalink to this definition"></a></dt>
+<dd><p>Save a web camera photo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>save_path</strong> – save web camera photo path</p></li>
+<li><p><strong>settings</strong> – video capture frame settings</p></li>
+<li><p><strong>with_datetime</strong> – with datetime text</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A boolean if success to save a web camera photo.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sensor.web_camera_module.debug">
+<span class="sig-prename descclassname"><span class="pre">sensor.web_camera_module.</span></span><span class="sig-name descname"><span class="pre">debug</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sensor.web_camera_module.debug" title="Permalink to this definition"></a></dt>
+<dd><p>debug function.</p>
+</dd></dl>
+
+</section>
+<section id="module-sensor">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sensor" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="lib.html" class="btn btn-neutral float-left" title="lib package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Takashi Suzuki.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
