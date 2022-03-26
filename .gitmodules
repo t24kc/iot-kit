@@ -1,4 +1,0 @@
-[submodule "docs/_build"]
-	path = docs/_build
-	url = git@github.com:t24kc/iot-kitchen-garden.git
-	branch = gh-pages
