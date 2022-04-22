@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "iot-kitchen-garden"
-version = "0.2.1"
+version = "0.2.2"
 description = "IoT kitchen garden system for using various sensors and Google Cloud services."
 authors = ["Takashi Suzuki <you@example.com>"]
 license = ""

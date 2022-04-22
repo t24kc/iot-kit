@@ -401,22 +401,27 @@ class Scheduler(object):
 
         history_df = self._get_history_dataframe()
 
-        kwargs = {"kind": "line", "use_index": True, "rot": 45}
+        kwargs = {"kind": "line", "legend": False, "use_index": True, "rot": 45}
         setting_list = []
-        for key in list(self._params.keys())[:4]:
+        for key in list(self._params.keys())[:5]:
             y = self.params_mapping[key]["name"]
             setting_list.append({"title": y, "x": "Time", "y": y})
 
         params_len = len(self._params)
         num_cols, num_rows = 1, 1
-        if params_len >= 4:
+        if params_len >= 5:
+            num_cols, num_rows = 3, 2
+        elif params_len == 4:
             num_cols, num_rows = 2, 2
         elif params_len == 3:
             num_rows = 3
         elif params_len == 2:
             num_rows = 2
 
-        fig, axes = plt.subplots(ncols=num_cols, nrows=num_rows, sharex="col")
+        fig, axes = plt.subplots(ncols=num_cols, nrows=num_rows, sharex="col", figsize=(15, 10))
+        if params_len == 5:
+            axes[1][2].set_visible(False)
+
         for ax, setting in zip(axes.ravel(), setting_list):
             history_df.plot(
                 setting["x"], setting["y"], ax=ax, title=setting["title"], **kwargs

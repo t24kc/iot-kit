@@ -153,7 +153,7 @@ module:
         # example
         - name: light
           limit: upper
-          threshold: 200
+          threshold: 100000
         - name: temperature
           limit: upper
           threshold: 35
@@ -165,8 +165,8 @@ module:
       at_time: ["08:00:00"]
     # video capture frame settings
     settings:
-      width: 7680
-      height: 4320
+      width: 1920
+      height: 1080
       fourcc: null # MJPG, YUYV, H264, etc
       fps: null # 15, 30, 60, etc
       focus: null # 0 ~ 255
