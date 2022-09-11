@@ -5,6 +5,8 @@ matplotlib==3.5.1
 oauth2client==4.1.3
 gspread==5.1.1
 google-api-python-client==2.33.0
+google-auth-httplib2==0.1.0
+google-auth-oauthlib==0.5.2
 smbus2==0.4.1
 opencv-python==4.1.0.25
 rpi.gpio==0.7.0

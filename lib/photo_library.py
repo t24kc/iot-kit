@@ -5,8 +5,9 @@ import socket
 import requests
 from logging import getLogger, basicConfig, INFO
 from typing import List, Dict, Optional, Any
-from httplib2 import Http
-from oauth2client import file, client, tools
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
 logger = getLogger(__name__)
@@ -27,8 +28,6 @@ class PhotoLibrary(object):
         """
         self._client_secrets_path = client_secrets_path
         self._token_path = token_path
-        self._flags, _ = tools.argparser.parse_known_args()
-        self._flags.noauth_local_webserver = True
 
     def _get_service(self) -> Any:
         """Get photoslibrary.v1 Service.
@@ -39,14 +38,22 @@ class PhotoLibrary(object):
         Returns:
             A Resource object with photoslibrary.v1 service.
         """
-        store = file.Storage(self._token_path)
-        token = store.get()
-        if not token or token.invalid:
-            flow = client.flow_from_clientsecrets(self._client_secrets_path, SCOPES)
-            token = tools.run_flow(flow, store, self._flags)
+        credentials = None
+        if os.path.exists(self._token_path):
+            credentials = Credentials.from_authorized_user_file(self._token_path, SCOPES)
+
+        if not credentials or not credentials.valid:
+            if credentials and credentials.expired and credentials.refresh_token:
+                credentials.refresh(Request())
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file(self._client_secrets_path, SCOPES)
+                credentials = flow.run_local_server(port=0, open_browser=False)
+            with open(self._token_path, "w") as token:
+                token.write(credentials.to_json())
+
         socket.setdefaulttimeout(300)
         service = build(
-            "photoslibrary", "v1", http=token.authorize(Http()), static_discovery=False
+            "photoslibrary", "v1", credentials=credentials, static_discovery=False
         )
 
         return service
@@ -185,7 +192,7 @@ class PhotoLibrary(object):
         # Use requests because python service api does not support.
         url = "https://photoslibrary.googleapis.com/v1/uploads"
         headers = {
-            "Authorization": f"Bearer {self._get_service()._http.request.credentials.access_token}",
+            "Authorization": f"Bearer {self._get_service()._http.credentials.token}",
             "Content-Type": "application/octet-stream",
             "X-Goog-Upload-File-Name": os.path.basename(image_path),
             "X-Goog-Upload-Protocol": "raw",
