@@ -1,4 +1,4 @@
-iot-kitchen-garden
+iot-kit
 ==================
 
 .. toctree::

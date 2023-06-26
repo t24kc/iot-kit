@@ -1,7 +1,7 @@
-# iot-kitchen-garden
+# iot-kit
 ![raspberry pi model](https://img.shields.io/badge/Raspberry%20Pi%20Model-3B%2B%20%7C%204B-red)
 ![python](https://img.shields.io/badge/python-3.7-blue)
-![release](https://img.shields.io/github/v/release/t24kc/iot-kitchen-garden)
+![release](https://img.shields.io/github/v/release/t24kc/iot-kit)
 
 IoT kitchen garden system for using various sensors and Google Cloud services.
 
@@ -23,7 +23,7 @@ $ poetry install
 
 ## Create Service Account
 ### By Website
-Create a service account, and move the created service account file under `.gcp/service_account.json`.
+Create a service account, and move the created service account file under `gcp/service_account.json`.
 - https://cloud.google.com/iam/docs/creating-managing-service-accounts
 ### By command line
 ```zsh
@@ -34,7 +34,7 @@ $ gcloud projects create [Project ID]
 # create service account
 $ gcloud iam service-accounts create [Service Account Name] --display-name [Display Name]
 # generate service account key
-$ gcloud iam service-accounts keys create .gcp/service_account.json --iam-account [Service Account Name]@[Project ID].iam.gserviceaccount.com
+$ gcloud iam service-accounts keys create gcp/service_account.json --iam-account [Service Account Name]@[Project ID].iam.gserviceaccount.com
 ```
 
 ## Enable APIs
@@ -49,7 +49,7 @@ $ gcloud services enable sheets.googleapis.com photoslibrary.googleapis.com gmai
 ```
 
 ## Create OAuth 2.0 Client ID
-Create OAuth 2.0 Client ID with choosing `Desktop Application` type, and move the created client secrets file under `.gcp/client_secrets.json`.
+Create OAuth 2.0 Client ID with choosing `Desktop Application` type, and move the created client secrets file under `gcp/client_secrets.json`.
 - https://developers.google.com/workspace/guides/create-credentials#desktop-app
 - https://console.cloud.google.com/apis/credentials
 
@@ -73,14 +73,14 @@ LABEL="co2mini_end"
 # Usage
 ## Update config
 Update config file `config.yaml` in advance. Change unused sensors and modules to `use: False`.
-- https://github.com/t24kc/iot-kitchen-garden/blob/main/config.yaml
+- https://github.com/t24kc/iot-kit/blob/main/config.yaml
 ```yaml
 google:
   default:
     # service account path
-    service_account_path: .gcp/service_account.json
+    service_account_path: gcp/service_account.json
     # client secrets path
-    client_secrets_path: .gcp/client_secrets.json
+    client_secrets_path: gcp/client_secrets.json
   spread_sheet:
     use: True # or False
     # spreadsheet id
@@ -88,14 +88,14 @@ google:
   photo_library:
     use: True # or False
     # photo library token path
-    token_path: .gcp/photo_token.json
+    token_path: gcp/photo_token.json
     # google photo album name
     album_title: IoT Kitchen Garden
     # save image directory
     img_dir: img
   mail:
     # mail token path
-    token_path: .gcp/mail_token.json
+    token_path: gcp/mail_token.json
     # email address to send
     to_address: dummy # TODO update
     summary:
@@ -165,8 +165,8 @@ module:
       at_time: ["08:00:00"]
     # video capture frame settings
     settings:
-      width: 1920
-      height: 1080
+      width: 1280
+      height: 960
       fourcc: null # MJPG, YUYV, H264, etc
       fps: null # 15, 30, 60, etc
       focus: null # 0 ~ 255
@@ -192,7 +192,7 @@ sensor:
 
 ## Run Script
 script usage.
-- https://t24kc.github.io/iot-kitchen-garden/handler.html
+- https://t24kc.github.io/iot-kit/handler.html
 ```zsh
 $ python3 handler.py --help
 usage: handler.py [-h] [-f FUNCTION]
