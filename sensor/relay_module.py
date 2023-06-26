@@ -58,7 +58,7 @@ def debug() -> None:
     import argparse
     parser = argparse.ArgumentParser(description="Relay module script")
     parser.add_argument(
-        "-i", "--interval", type=int, default=10, help="set relay module turn on minutes"
+        "-i", "--interval", type=int, default=0.2, help="set relay module turn on minutes"
     )
     args = parser.parse_args()
 

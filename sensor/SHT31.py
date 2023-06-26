@@ -9,14 +9,14 @@ logger.setLevel(INFO)
 
 ADDRESS = 0x44
 
-COMMAND_MEAS_HIGHREP = 0x2C
-COMMAND_RESULT = 0x00
+COMMAND_MEAS_CLKST = 0x2C
+COMMAND_MEAS_HIGHREP = [0x06]
 
 
 class SHT31(object):
     def __init__(self, address: int = ADDRESS) -> None:
         """Temperature and Humidity Sensor Client Object.
-        See: https://akizukidenshi.com/download/ds/sensirion/SHT31_20201119.pdf
+        See: https://sensirion.com/media/documents/213E6A3B/63A5A569/Datasheet_SHT3x_DIS.pdf
 
         Args:
             address: Temperature and Humidity Sensor address
@@ -49,10 +49,10 @@ class SHT31(object):
         Returns:
             temperature, humidity value
         """
-        self.write_list(COMMAND_MEAS_HIGHREP, [0x06])
+        self.write_list(COMMAND_MEAS_CLKST, COMMAND_MEAS_HIGHREP)
         sleep(0.5)
 
-        data = self.read_list(COMMAND_RESULT, 6)
+        data = self.read_list(0x00, 6)
         temperature = -45 + (175 * (data[0] * 256 + data[1]) / 65535.0)
         humidity = 100 * (data[3] * 256 + data[4]) / 65535.0
 
