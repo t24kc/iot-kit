@@ -1,7 +1,7 @@
-# iot-kitchen-garden
+# iot-kit
 ![raspberry pi model](https://img.shields.io/badge/Raspberry%20Pi%20Model-3B%2B%20%7C%204B-red)
 ![python](https://img.shields.io/badge/python-3.7-blue)
-![release](https://img.shields.io/github/v/release/t24kc/iot-kitchen-garden)
+![release](https://img.shields.io/github/v/release/t24kc/iot-kit)
 
 IoT kitchen garden system for using various sensors and Google Cloud services.
 
@@ -73,7 +73,7 @@ LABEL="co2mini_end"
 # Usage
 ## Update config
 Update config file `config.yaml` in advance. Change unused sensors and modules to `use: False`.
-- https://github.com/t24kc/iot-kitchen-garden/blob/main/config.yaml
+- https://github.com/t24kc/iot-kit/blob/main/config.yaml
 ```yaml
 google:
   default:
@@ -192,7 +192,7 @@ sensor:
 
 ## Run Script
 script usage.
-- https://t24kc.github.io/iot-kitchen-garden/handler.html
+- https://t24kc.github.io/iot-kit/handler.html
 ```zsh
 $ python3 handler.py --help
 usage: handler.py [-h] [-f FUNCTION]

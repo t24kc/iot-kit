@@ -4,7 +4,7 @@ Google Service Client Objects.
 # Usage
 ## Mail
 Google Mail Script.
-- https://t24kc.github.io/iot-kitchen-garden/lib.html#module-lib.mail
+- https://t24kc.github.io/iot-kit/lib.html#module-lib.mail
 ```zsh
 $ python3 mail.py --help
 usage: mail.py [-h] [-a TO_ADDRESS] [-s SUBJECT] [-b BODY]
@@ -23,7 +23,7 @@ optional arguments:
 
 ## PhotoLibrary
 Google Photo Library Script.
-- https://t24kc.github.io/iot-kitchen-garden/lib.html#module-lib.photo_library
+- https://t24kc.github.io/iot-kit/lib.html#module-lib.photo_library
 ```zsh
 $ python3 photo_library.py
 usage: photo_library.py
@@ -34,7 +34,7 @@ Google Photo Library Script
 
 ## SpreadSheet
 Google Spread Sheet Script.
-- https://t24kc.github.io/iot-kitchen-garden/lib.html#module-lib.spread_sheet
+- https://t24kc.github.io/iot-kit/lib.html#module-lib.spread_sheet
 ```zsh
 $ python3 spread_sheet.py --help
 usage: spread_sheet.py [-h] [-s SPREAD_SHEET_ID] [-t INPUT_TEXT]

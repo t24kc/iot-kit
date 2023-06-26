@@ -19,7 +19,7 @@ sys.path.insert(0, project_dir)
 
 # -- Project information -----------------------------------------------------
 
-project = 'iot-kitchen-garden'
+project = 'iot-kit'
 copyright = '2022, Takashi Suzuki'
 author = 'Takashi Suzuki'
 

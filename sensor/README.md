@@ -4,7 +4,7 @@ Sensor and Module Client Objects.
 # Usage
 ## BH1750FVI
 Digital light sensor script.
-- https://t24kc.github.io/iot-kitchen-garden/sensor.html#module-sensor.BH1750FVI
+- https://t24kc.github.io/iot-kit/sensor.html#module-sensor.BH1750FVI
 ```zsh
 $ python3 BH1750FVI.py --help
 usage: BH1750FVI.py [-h] [-i INTERVAL]
@@ -19,7 +19,7 @@ optional arguments:
 
 ## CO2MINI
 CO2 sensor script.
-- https://t24kc.github.io/iot-kitchen-garden/sensor.html#module-sensor.CO2MINI
+- https://t24kc.github.io/iot-kit/sensor.html#module-sensor.CO2MINI
 ```zsh
 $ python3 CO2MINI.py --help
 usage: CO2MINI.py [-h] [-i INTERVAL]
@@ -34,7 +34,7 @@ optional arguments:
 
 ## SHT31
 Temperature and humidity sensor script.
-- https://t24kc.github.io/iot-kitchen-garden/sensor.html#module-sensor.SHT31
+- https://t24kc.github.io/iot-kit/sensor.html#module-sensor.SHT31
 ```zsh
 $ python3 SHT31.py --help
 usage: SHT31.py [-h] [-i INTERVAL]
@@ -49,7 +49,7 @@ optional arguments:
 
 ## VL6180
 Infrared distance sensor script.
-- https://t24kc.github.io/iot-kitchen-garden/sensor.html#module-sensor.VL6180
+- https://t24kc.github.io/iot-kit/sensor.html#module-sensor.VL6180
 ```zsh
 $ python3 VL6180.py --help
 usage: VL6180.py [-h] [-i INTERVAL]
@@ -64,7 +64,7 @@ optional arguments:
 
 ## RelayModule
 Relay module script.
-- https://t24kc.github.io/iot-kitchen-garden/sensor.html#sensor-relay-module-module
+- https://t24kc.github.io/iot-kit/sensor.html#sensor-relay-module-module
 ```zsh
 $ python3 relay_module.py --help
 usage: relay_module.py [-h] [-i INTERVAL]
@@ -79,7 +79,7 @@ optional arguments:
 
 ## WebCameraModule
 Web camera module script.
-- https://t24kc.github.io/iot-kitchen-garden/sensor.html#module-sensor.web_camera_module
+- https://t24kc.github.io/iot-kit/sensor.html#module-sensor.web_camera_module
 ```zsh
 $ python3 web_camera_module.py --help
 usage: web_camera_module.py [-h] [--fourcc FOURCC] [--width WIDTH]
