@@ -10,8 +10,8 @@ IoT kitchen garden system for using various sensors and Google Cloud services.
 ## Install Packages
 Install linux package.
 ```zsh
-$ sudo apt-get update
-$ sudo apt-get install python-opencv libatlas-base-dev
+$ sudo apt update
+$ sudo apt install libatlas-base-dev
 ```
 Install python package.
 ```zsh
