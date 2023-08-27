@@ -13,7 +13,7 @@ google:
     # photo library token path
     token_path: gcp/photo_token.json
     # google photo album name
-    album_title: IoT Kitchen Garden
+    album_title: IoT-kit
     # save image directory
     img_dir: img
   mail:
@@ -23,7 +23,7 @@ google:
     to_address: dummy # TODO update
     summary:
       use: True # or False
-      subject: "[Summary] IoT Kitchen Garden"
+      subject: "[Summary] IoT-kit"
       body: "Summary data of IoT sensor for the last {from_days} days."
       from_days: 7
       scheduler:
@@ -31,7 +31,7 @@ google:
         at_time: ["09:00:00"]
     alert:
       use: True # or False
-      subject: "[Alert] IoT Kitchen Garden"
+      subject: "[Alert] IoT-kit"
       body:
         # {name}, {threshold}, {value}, {unit} will be converted
         upper: "{name} has risen above the setting value of {threshold}{unit} (currently: {value}{unit})."
