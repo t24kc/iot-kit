@@ -62,11 +62,11 @@ module:
     # time to turn on power (minutes)
     turn_on_minutes: 0.5
     scheduler:
-      use: True # or False
+      use: False # or True
       day_of_week: [ monday, tuesday, wednesday, thursday, friday, saturday, sunday ]
       at_time: ["08:30:00"]
     conditions:
-      use: True # or False
+      use: False # or True
       # time to skip the turning on relay module (minutes)
       skip_interval_minutes: 720
       # available filters.name [ light, temperature, humidity, co2, distance ]
