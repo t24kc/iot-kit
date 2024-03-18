@@ -19,7 +19,7 @@ google-auth-httplib2 = "^0.1.0"
 google-auth-oauthlib = "^0.5.2"
 smbus2 = "^0.4.1"
 opencv-python = "4.6.0.66"
-"RPi.GPIO" = "^0.7.0"
+"RPi.GPIO" = "^0.7.1"
 
 [tool.poetry.dev-dependencies]
 Sphinx = "^4.4.0"
