@@ -10,4 +10,4 @@ google-auth-httplib2==0.1.0
 google-auth-oauthlib==0.5.2
 smbus2==0.4.1
 opencv-python==4.6.0.66
-rpi.gpio==0.7.0
+rpi.gpio==0.7.1
