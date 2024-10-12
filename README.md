@@ -12,11 +12,14 @@ Install linux package.
 ```zsh
 $ sudo apt update
 $ sudo apt install libatlas-base-dev
+$ sudo apt install -y python3-opencv
 ```
-Install python package.
+Install other python package.
 ```zsh
-# install with pip
+# if you are using Bullseye OS for Raspberry Pi
 $ pip3 install -r requirements.txt
+# if you are using Bookworm OS for Raspberry Pi, run below instead of a command above.
+$ pip3 install -r requirements.txt --break-system-packages
 # install with poetry (optional)
 $ poetry install
 ```
