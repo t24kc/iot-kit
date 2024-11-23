@@ -14,7 +14,12 @@ logger = getLogger(__name__)
 basicConfig(level=INFO)
 logger.setLevel(INFO)
 
-SCOPES = ["https://www.googleapis.com/auth/photoslibrary"]
+# Update scopes based on new requirements
+SCOPES = [
+    "https://www.googleapis.com/auth/photoslibrary.appendonly",
+    "https://www.googleapis.com/auth/photoslibrary.readonly.appcreateddata",
+    "https://www.googleapis.com/auth/photoslibrary.edit.appcreateddata"
+]
 MAX_API_RETRY = 3
 
 
