@@ -161,7 +161,6 @@ class Scheduler(object):
     def monitoring_job(self) -> None:
         """Create the monitoring job.
         """
-        logger.info("Start monitoring job.")
         self._reduce_interval_minutes()
         self._fetch_params()
         self._logging_spread_sheet()
@@ -183,7 +182,6 @@ class Scheduler(object):
         """
         for key, data in self._params.items():
             sensor = self._params[key]["function"]()
-            logger.info(f"sensor: {key}: value: {sensor}")
             average = self._params[key]["average"]
             count = self._params[key]["count"]
             max = self._params[key]["max"]
