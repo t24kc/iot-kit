@@ -497,8 +497,8 @@ class Scheduler(object):
                 self._config["google"]["mail"]["summary"]["body"]["contents"].format(
                     sensor=key,
                     average=self._params[key]["average"],
-                    max=self._params["max"],
-                    min=self._params["min"],
+                    max=self._params[key]["max"],
+                    min=self._params[key]["min"],
                 )
                 + "\n"
             )
